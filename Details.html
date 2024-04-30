@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bus Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-image: url('https://media.gettyimages.com/id/1331507775/photo/as-segregation-on-city-bus-lines-ended-after-a-supreme-court-ruling-many-black-riders-still.jpg?s=612x612&w=0&k=20&c=GwJMPlkJqk5o9aQje7rF3q_9cLsiOV4_WEtP-AJiK3I=');
+      background-size: cover;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    #details {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    p {
+      margin-bottom: 10px;
+    }
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .button {
+      margin-right: 10px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bus Details</h1>
+  <div id="details">
+    <p>Source: <span id="source"></span></p>
+    <p>Destination: <span id="destination"></span></p>
+    <p>Date: <span id="date"></span></p>
+    <p>Details: <span id="detailsContent"></span></p>
+  </div>
+
+  <div class="button-container">
+    <button class="button" onclick="window.location.href='http://localhost:8081/db'">Add Passenger</button>
+    <button class="button" onclick="window.location.href='http://localhost:8081/display'">Show All Passengers</button>
+    <button class="button" onclick="window.location.href='http://localhost:8081/search'">Check UserID</button>
+    <button class="button" onclick="window.location.href='http://localhost:8081/delete'">Delete User Details</button>
+    <button class="button" onclick="window.location.href='http://localhost:8081/update'">Update Passenger</button>
+  </div>
+
+  <script>
+    function getQueryVariable(variable) {
+      const query = window.location.search.substring(1);
+      const vars = query.split('&');
+      for (let i = 0; i < vars.length; i++) {
+        const pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) === variable) {
+          return decodeURIComponent(pair[1]);
+        }
+      }
+      console.error('Query variable %s not found', variable);
+    }
+
+    const source = getQueryVariable('source');
+    const destination = getQueryVariable('destination');
+    const date = getQueryVariable('date');
+    const details = decodeURIComponent(getQueryVariable('details'));
+
+    document.getElementById('source').textContent = source;
+    document.getElementById('destination').textContent = destination;
+    document.getElementById('date').textContent = date;
+    document.getElementById('detailsContent').textContent = details;
+  </script>
+</body>
+</html>
